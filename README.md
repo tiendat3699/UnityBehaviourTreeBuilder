@@ -7,10 +7,8 @@
 <br>
 <br>
 <br>
-    <h1>Behaviour Tree Editor</h1>
-    <img src="Documentation/Images/thekiwicoder_profile_square_noborder_512_512.png" width = "64" />
+    <h1>Behaviour Tree Builder</h1>
     <br>
-    Created by TheKiwiCoder
 </div>
 
 ## Table of Contents
@@ -38,6 +36,8 @@
 
 ## Overview
 
+This project is simple behaviour tree based on Behaviour Tree Editor of Thekiwicoder, You can check out the original here https://github.com/thekiwicoder0/UnityBehaviourTreeEditor
+
 This repository contains a Unity Package which can be installed from package manager. 
 
 
@@ -48,7 +48,7 @@ The minimum version currently supported is Unity 2021.3.
 To install the BehaviourTreeEditor, run the `Add Package From git URL` command from PackageManager inside Unity and paste in the following URL:
 
 ```
-https://github.com/thekiwicoder0/UnityBehaviourTreeEditor.git
+https://github.com/tiendat3699/UnityBehaviourTreeBuilder.git
 ```
 
 See https://docs.unity3d.com/Manual/upm-ui-actions.html for more options on installing packages.
@@ -276,10 +276,11 @@ The assets menu dropdown shows all behaviour trees located in the project. Use t
 
 ### Runtime Debugging
 
-While in playmode, a game object can be selected to analyse which state it's in. Nodes that are red have failed, nodes that a green have succeeded, and nodes that are yellow are currently running. If a node is aborted then it returns to the default state without any highlight.
+While in playmode, a game object can be selected to analyse which state it's in Nodes that are red have failed, nodes that a green have succeeded, and nodes that are aqua are currently running. If a node is aborted then it returns to the default state without any highlight.
 
-### Settings Menu
+<div style="display: inline-block; background-color: aqua; height: 10px; width: 10px"></div> Running
+<br>
+<div style="display: inline-block; background-color: green; height: 10px; width: 10px"></div> Succeeded
+<br>
+<div style="display: inline-block; background-color: red; height: 10px; width: 10px"></div> Failed
 
-There are various settings for the behaviour tree editor. These can be accessed via the standard project settings menu under the 'Behaviour Tree' category.
-
-<img src="Documentation/Images/settings.png" width = "400" />
