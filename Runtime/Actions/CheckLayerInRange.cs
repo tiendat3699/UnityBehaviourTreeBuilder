@@ -47,7 +47,14 @@ namespace BehaviourTreeBuilder
         public override void OnDrawGizmos()
         {
             if(context == null) return;
-            Gizmos.color = state == State.Success ? Color.green : Color.red;
+            if (state != State.Running)
+            {
+                Gizmos.color = state == State.Success ? Color.green : Color.red;
+            }
+            else
+            {
+                Gizmos.color = Color.cyan;
+            }
             Gizmos.DrawWireSphere(context.Transform.position, _detectRadius.Value);
         }
 

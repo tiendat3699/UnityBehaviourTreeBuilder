@@ -17,9 +17,8 @@
   ],
   "samples": [
     {
-      "displayName": "Random Walk",
-      "description": "Simple example behaviour tree which moves a navmeshagent to random locations within a bounding area",
-      "path": "Samples~/RandomWalk"
+      "displayName": "Sample",
+      "path": "Samples~/Scenes"
     }
   ]
 }

@@ -31,7 +31,7 @@ namespace BehaviourTreeBuilder {
 
         public override string OnShowDescription()
         {
-            return state == State.Idle ? $"Wait: {_duration}" : $"Wait: {_counter}";
+            return state == State.Idle ? $"Wait: {_duration:F2}s" : $"Wait: {_counter:F2}s";
         }
     }
 }
