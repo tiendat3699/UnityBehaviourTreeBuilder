@@ -80,7 +80,7 @@ namespace BehaviourTreeBuilder
             var tree = EditorUtility.CreateNewTree(treeNameField.text, locationPathField.text);
             if (tree)
             {
-                var runner = Selection.activeGameObject.GetComponent<BehaviourTreeInstance>();
+                var runner = Selection.activeGameObject?.GetComponent<BehaviourTreeInstance>();
                 if (runner && runner.behaviourTree == null) runner.behaviourTree = tree;
                 TreeSelected(tree);
                 style.visibility = Visibility.Hidden;
