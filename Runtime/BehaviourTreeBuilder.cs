@@ -64,7 +64,7 @@ namespace BehaviourTreeBuilder
             var totalWidth = children.Sum(c => CalculateTreeWidth(c));
             return totalWidth;
         }
-        
+
 #if UNITY_EDITOR
         public void Save(string path)
         {
@@ -75,7 +75,7 @@ namespace BehaviourTreeBuilder
                 AssetDatabase.SaveAssets();
             }
         }
+#endif
     }
 }
-#endif
 
