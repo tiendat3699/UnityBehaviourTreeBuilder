@@ -15,10 +15,6 @@ namespace BehaviourTreeBuilder
         public VisualTreeAsset behaviourTreeXml;
         public VisualTreeAsset nodeXml;
         public StyleSheet behaviourTreeStyle;
-        public TextAsset scriptTemplateActionNode;
-        public TextAsset scriptTemplateCompositeNode;
-        public TextAsset scriptTemplateDecoratorNode;
-
         [SerializeField] public PendingScriptCreate pendingScriptCreate = new();
 
         [HideInInspector] public BehaviourTree tree;
@@ -164,7 +160,7 @@ namespace BehaviourTreeBuilder
             // #TODO: Unify this with CreateNodeWindow.CreateNode
 
             var source = treeView.GetNodeByGuid(pendingScriptCreate.sourceGuid) as NodeView;
-            var nodeType = Type.GetType($"{settings.namespaceScriptNode}.{pendingScriptCreate.scriptName}, Assembly-CSharp");
+            var nodeType = Type.GetType($"{pendingScriptCreate.scriptName}, Assembly-CSharp");
             if (nodeType != null)
             {
                 NodeView createdNode;

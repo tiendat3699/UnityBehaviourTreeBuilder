@@ -13,15 +13,13 @@ namespace BehaviourTreeBuilder
     // Create a new type of Settings Asset.
     public class BehaviourTreeProjectSettings : ScriptableObject
     {
-        [Required]
-        public string namespaceScriptNode;
         [Tooltip("Folder where new tree assets will be created")]
         [FolderPath, Required]
         public string newTreePath = "Assets";
-
-        [Tooltip("Folder where new node scripts will be created")]
-        [FolderPath, Required]
-        public string newNodePath = "Assets";
+        [HideInInspector] public string newNodePath = "Assets";
+        public bool autoGenarateNameSpace;
+        [ShowIf(nameof(autoGenarateNameSpace))]
+        public string rootNamespace;
         
         [Header("Custom Script Template")]
         [Tooltip("Script template to use when creating action nodes")]

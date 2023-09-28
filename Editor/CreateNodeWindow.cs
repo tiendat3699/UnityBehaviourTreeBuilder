@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -30,6 +31,8 @@ namespace BehaviourTreeBuilder
                 foreach (var type in types)
                 {
                     Action invoke = () => CreateNode(type, context);
+                    // AddNodeMenuAttribute attribute = type.GetCustomAttribute<AddNodeMenuAttribute>();
+                    // Debug.Log(attribute.MenuName);
                     tree.Add(new SearchTreeEntry(new GUIContent($"{ObjectNames.NicifyVariableName(type.Name)}", icon))
                         { level = 2, userData = invoke });
                 }

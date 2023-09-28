@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05473cfd9c6b416d87c99b35b8d64b3b, type: 3}
+  m_Name: DefaultConfig
+  m_EditorClassIdentifier: 
+  scriptTemplateActionNodeNoNamespace: {fileID: 4900000, guid: a64ffabe5efa465f9d812b19996d1b7f, type: 3}
+  scriptTemplateCompositeNodeNoNamespace: {fileID: 4900000, guid: 82ca019e638544f0a778c78aaae597ad, type: 3}
+  scriptTemplateDecoratorNodeNoNamespace: {fileID: 4900000, guid: a73c097e399c49f1a7e972be82a43255, type: 3}
+  scriptTemplateActionNodeNamespace: {fileID: 4900000, guid: 39908033e6333954ab068f9cd4335cab, type: 3}
+  scriptTemplateCompositeNodeNamespace: {fileID: 4900000, guid: 50af0744759a6f148891a0302871668f, type: 3}
+  scriptTemplateDecoratorNodeNamespace: {fileID: 4900000, guid: 68ec90eda70221843b347ce647ce661a, type: 3}

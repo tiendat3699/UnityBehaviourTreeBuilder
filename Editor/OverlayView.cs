@@ -31,7 +31,7 @@ namespace BehaviourTreeBuilder
             treeNameField = this.Q<TextField>("TreeName");
             locationPathField = this.Q<TextField>("LocationPath");
 
-            locationPathField.BindProperty(settings.FindProperty("newTreePath"));
+            locationPathField.value = settings.FindProperty("newTreePath").stringValue;
 
             // Configure asset selection dropdown menu
             var behaviourTrees = EditorUtility.GetAssetPaths<BehaviourTree>();

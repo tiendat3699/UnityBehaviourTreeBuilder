@@ -4,6 +4,7 @@ using UnityEngine;
 namespace BehaviourTreeBuilder
 {
     [Serializable]
+    [AddNodeMenu("Action")]
     public class Breakpoint : ActionNode
     {
         protected override void OnStart()
