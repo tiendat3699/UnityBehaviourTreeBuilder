@@ -3,6 +3,7 @@ using System;
 namespace BehaviourTreeBuilder
 {
     [Serializable]
+    [AddNodeMenu("Decorators")]
     public class Failure : DecoratorNode
     {
         protected override void OnStart()

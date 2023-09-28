@@ -3,6 +3,7 @@ using System;
 namespace BehaviourTreeBuilder
 {
     [Serializable]
+    [AddNodeMenu("Actions")]
     public class SetProperty : ActionNode
     {
         public BlackboardKeyValuePair pair;

@@ -3,6 +3,7 @@ using System;
 namespace BehaviourTreeBuilder
 {
     [Serializable]
+    [AddNodeMenu("Decorators")]
     public class Inverter : DecoratorNode
     {
         protected override void OnStart()

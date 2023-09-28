@@ -3,6 +3,7 @@ using System;
 namespace BehaviourTreeBuilder
 {
     [Serializable]
+    [AddNodeMenu("Composites")]
     public class Sequencer : CompositeNode
     {
         protected int current;

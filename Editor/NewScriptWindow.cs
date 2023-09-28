@@ -1,10 +1,13 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -27,6 +30,7 @@ namespace BehaviourTreeBuilder
         
         [SerializeField] [Required] private string _scriptName;
         [SerializeField] [Required, FolderPath] private string _savePath;
+        [ShowInInspector, NonSerialized] private string _customMenuPath;
         [SerializeField] [EnumToggleButtons] private NodeType _nodeType;
         private string _scriptPath;
 
@@ -40,10 +44,10 @@ namespace BehaviourTreeBuilder
         public static void OpenWindow()
         {
             var window = GetWindow<NewScriptWindow>();
-            window.position = GUIHelper.GetEditorWindowRect().AlignCenter(400, 160);
+            window.position = GUIHelper.GetEditorWindowRect().AlignCenter(400, 150);
             window.maximized = false;
-            window.maxSize = new(400, 160);
-            window.minSize = new(400, 160);
+            window.maxSize = new(400, 150);
+            window.minSize = new(400, 150);
             window.ShowModal();
         }
 
@@ -63,11 +67,11 @@ namespace BehaviourTreeBuilder
                     break;
                 case NodeType.Composite:
                     template.TemplateFile = GetScriptTemplate(1);
-                    template.SubFolder = "Composite";
+                    template.SubFolder = "Composites";
                     break;
                 case NodeType.Decorator:
                     template.TemplateFile = GetScriptTemplate(2);
-                    template.SubFolder = "Decorator";
+                    template.SubFolder = "Decorators";
                     break;
             }
 
@@ -80,15 +84,18 @@ namespace BehaviourTreeBuilder
                 if (!Directory.Exists(path)) Directory.CreateDirectory(path);
                 
                 var contentTemplate = template.TemplateFile.text;
-                contentTemplate = contentTemplate.Replace("#SCRIPTNAME#", scriptName);
+                var menuPath = String.IsNullOrEmpty(_customMenuPath) ? _savePath.Replace("Assets/", "") : _customMenuPath;
+                contentTemplate = contentTemplate
+                    .Replace("#SCRIPTNAME#", scriptName)
+                    .Replace("#MENUNAME#", menuPath);;
                 if (_setting.autoGenarateNameSpace)
                 {
-                    string nameSpace = _setting.rootNamespace + path
-                        .Replace("Assets/", "")
+                    string nameSpace = _setting.rootNamespace + menuPath
                         .Replace("/",".")
                         .Replace(" ", "");
+
                     contentTemplate = contentTemplate
-                        .Replace($"#NAMESPACEBEGIN#", $"namespace {nameSpace} \n{{")
+                        .Replace("#NAMESPACEBEGIN#", $"namespace {nameSpace} \n{{")
                         .Replace("#NAMESPACEEND#", "}");
                 }
 

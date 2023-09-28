@@ -4,6 +4,7 @@ using UnityEngine;
 namespace BehaviourTreeBuilder
 {
     [Serializable]
+    [AddNodeMenu("Actions")]
     public class Log : ActionNode
     {
         [Tooltip("Message to log to the console")]

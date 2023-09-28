@@ -4,6 +4,7 @@ using UnityEngine;
 namespace BehaviourTreeBuilder
 {
     [Serializable]
+    [AddNodeMenu("Decorators")]
     public class Repeat : DecoratorNode
     {
         [Tooltip("Restarts the subtree on success")]

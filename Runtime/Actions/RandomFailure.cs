@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 namespace BehaviourTreeBuilder
 {
     [Serializable]
+    [AddNodeMenu("Actions")]
     public class RandomFailure : ActionNode
     {
         [Range(0, 1)] [Tooltip("Percentage chance of failure")]

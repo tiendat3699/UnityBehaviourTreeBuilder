@@ -6,11 +6,12 @@ namespace BehaviourTreeBuilder
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class AddNodeMenuAttribute : Attribute
     {
-        public readonly string MenuName;
+        public readonly string menuName;
+        public readonly bool listAable;
 
         public AddNodeMenuAttribute(string menuName)
         {
-            MenuName = menuName;
+            this.menuName = menuName;
         }
     }
 }

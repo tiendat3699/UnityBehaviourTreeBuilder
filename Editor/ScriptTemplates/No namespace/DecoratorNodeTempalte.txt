@@ -4,6 +4,7 @@ using BehaviourTreeBuilder;
 
 
 [Serializable]
+[AddNodeMenu("#MENUNAME#")]
 public class #SCRIPTNAME# : DecoratorNode
 {
     // OnStart is called immediately before execution. It is used to setup any variables that need to be reset from the previous run.

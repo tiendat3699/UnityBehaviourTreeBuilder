@@ -5,6 +5,7 @@ using System.Linq;
 namespace BehaviourTreeBuilder
 {
     [Serializable]
+    [AddNodeMenu("Composites")]
     public class Parallel : CompositeNode
     {
         private List<State> childrenLeftToExecute = new();

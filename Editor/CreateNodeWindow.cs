@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace BehaviourTreeBuilder
 {
     public class CreateNodeWindow : ScriptableObject, ISearchWindowProvider
     {
+        public string testing;
         private Texture2D icon;
         private bool isSourceParent;
         private EditorUtility.ScriptTemplate[] scriptFileAssets;
@@ -23,54 +25,32 @@ namespace BehaviourTreeBuilder
                 new SearchTreeGroupEntry(new GUIContent("Create Node"))
             };
 
-            // Action nodes can only be added as children
-            if (isSourceParent || source == null)
-            {
-                tree.Add(new SearchTreeGroupEntry(new GUIContent("Actions")) { level = 1 });
-                var types = TypeCache.GetTypesDerivedFrom<ActionNode>();
-                foreach (var type in types)
-                {
-                    Action invoke = () => CreateNode(type, context);
-                    // AddNodeMenuAttribute attribute = type.GetCustomAttribute<AddNodeMenuAttribute>();
-                    // Debug.Log(attribute.MenuName);
-                    tree.Add(new SearchTreeEntry(new GUIContent($"{ObjectNames.NicifyVariableName(type.Name)}", icon))
-                        { level = 2, userData = invoke });
-                }
-            }
+            List<string> groups = new List<string>();
 
+            foreach (var item in GetListNode())
             {
-                tree.Add(new SearchTreeGroupEntry(new GUIContent("Composites")) { level = 1 });
+                var entryTitle = item.Path.Split('/');
+                var groupName = "";
+                for (int i = 0; i < entryTitle.Length - 1; i++)
                 {
-                    var types = TypeCache.GetTypesDerivedFrom<CompositeNode>();
-                    foreach (var type in types)
+                    groupName += entryTitle[i];
+                    if (!groups.Contains(groupName))
                     {
-                        Action invoke = () => CreateNode(type, context);
-                        tree.Add(new SearchTreeEntry(new GUIContent($"{ObjectNames.NicifyVariableName(type.Name)}", icon))
-                            { level = 2, userData = invoke });
+                        tree.Add(new SearchTreeGroupEntry(new GUIContent(entryTitle[i]),i+1));
+                        groups.Add(groupName);
                     }
+
+                    groupName += "/";
                 }
+                Action invoke = () => CreateNode(item.TypeNode, context);
+                tree.Add(new SearchTreeEntry(new GUIContent(ObjectNames.NicifyVariableName(entryTitle.Last()), icon))
+                { level = entryTitle.Length, userData = invoke});
             }
-
-            {
-                tree.Add(new SearchTreeGroupEntry(new GUIContent("Decorators")) { level = 1 });
-                {
-                    var types = TypeCache.GetTypesDerivedFrom<DecoratorNode>();
-                    foreach (var type in types)
-                    {
-                        Action invoke = () => CreateNode(type, context);
-                        tree.Add(new SearchTreeEntry(new GUIContent($"{ObjectNames.NicifyVariableName(type.Name)}", icon))
-                            { level = 2, userData = invoke });
-                    }
-                }
-            }
-
-            {
-                Action createActionScript = () => CreateScript(context);
-                tree.Add(new SearchTreeEntry(new GUIContent("New Script", icon))
-                    { level = 1, userData = createActionScript });
-            }
-
-
+            
+            Action createActionScript = () => CreateScript(context);
+            tree.Add(new SearchTreeEntry(new GUIContent("New Script", icon)) 
+                { level = 1, userData = createActionScript });
+            
             return tree;
         }
 
@@ -132,6 +112,53 @@ namespace BehaviourTreeBuilder
             EditorUtility.CreateNewScript(source, isSourceParent, nodePosition);
         }
 
+        private List<ListNodeSearchData> GetListNode()
+        {
+            var types = TypeCache.GetTypesDerivedFrom<Node>();
+            var listView = new List<ListNodeSearchData>();
+            foreach (var type in types)
+            {
+                var attribute = type.GetCustomAttribute<AddNodeMenuAttribute>();
+                if (attribute != null)
+                {
+                    var path =  attribute.menuName != "" ? attribute.menuName + "/" + type.Name : "Other/" + type.Name;
+                    listView.Add(new ListNodeSearchData(type, path));
+                }
+            }
+            
+            listView.Sort((a, b) =>
+            {
+                var split1 = a.Path.Split("/");
+                var split2 = b.Path.Split("/");
+
+                if (split1[0] == "Other") return 1;
+                if (split2[0] == "Other") return -1;
+
+                for (int i = 0; i < split1.Length; i++)
+                {
+                    if (i > split2.Length)
+                    {
+                        return 1;
+                    }
+
+                    int value = split1[i].CompareTo(split2[i]);
+                    if (value != 0)
+                    {
+                        if (split1.Length != split2.Length && (i == split1.Length - 1 || i == split2.Length - 1))
+                        {
+                            return split1.Length < split2.Length ? 1 : -1;
+                        }
+
+                        return value;
+                    }
+                }
+
+                return 0;
+            });
+
+            return listView;
+        }
+
         public static void Show(Vector2 mousePosition, NodeView source, bool isSourceParent = false)
         {
             var screenPoint = GUIUtility.GUIToScreenPoint(mousePosition);
@@ -139,6 +166,20 @@ namespace BehaviourTreeBuilder
             searchWindowProvider.Initialise(BehaviourTreeEditorWindow.Instance.treeView, source, isSourceParent);
             var windowContext = new SearchWindowContext(screenPoint, 240, 320);
             SearchWindow.Open(windowContext, searchWindowProvider);
+        }
+        
+    }
+    
+    public class ListNodeSearchData
+    {
+        public string Path;
+        public Type TypeNode;
+
+        public ListNodeSearchData(Type type, string path)
+        {
+            TypeNode = type;
+            var attribute = type.GetCustomAttribute<AddNodeMenuAttribute>();
+            Path = path;
         }
     }
 }

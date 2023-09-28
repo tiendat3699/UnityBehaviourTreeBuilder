@@ -4,6 +4,7 @@ using Random = UnityEngine.Random;
 namespace BehaviourTreeBuilder
 {
     [Serializable]
+    [AddNodeMenu("Composites")]
     public class RandomSelector : CompositeNode
     {
         protected int current;

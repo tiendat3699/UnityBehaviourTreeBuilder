@@ -3,6 +3,7 @@ using System;
 namespace BehaviourTreeBuilder
 {
     [Serializable]
+    [AddNodeMenu("Composites")]
     public class Switch : CompositeNode
     {
         public NodeProperty<int> index;

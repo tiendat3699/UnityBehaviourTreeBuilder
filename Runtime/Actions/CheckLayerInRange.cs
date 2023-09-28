@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 namespace BehaviourTreeBuilder
 {
-    [System.Serializable]
+    [Serializable]
+    [AddNodeMenu("Actions")]
     public class CheckLayerInRange : ActionNode
     {
         [SerializeField] private NodeProperty<float> _detectRadius = new NodeProperty<float>(10);

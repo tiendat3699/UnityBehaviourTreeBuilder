@@ -4,6 +4,7 @@ using UnityEngine;
 namespace BehaviourTreeBuilder
 {
     [Serializable]
+    [AddNodeMenu("Decorators")]
     public class Timeout : DecoratorNode
     {
         [Tooltip("Returns failure after this amount of time if the subtree is still running.")]

@@ -1,9 +1,9 @@
 using System;
-using UnityEngine;
 
 namespace BehaviourTreeBuilder
 {
     [Serializable]
+    [AddNodeMenu("Actions")]
     public class CompareProperty : ActionNode
     {
         public BlackboardKeyValuePair pair;

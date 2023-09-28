@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace BehaviourTreeBuilder {
 
-    [System.Serializable]
+    [Serializable]
+    [AddNodeMenu("Actions")]
     public class Wait : ActionNode {
 
         [Tooltip("Amount of time to wait before returning success")] 

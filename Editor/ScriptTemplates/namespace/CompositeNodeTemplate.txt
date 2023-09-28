@@ -4,6 +4,7 @@ using BehaviourTreeBuilder;
 
 #NAMESPACEBEGIN#
     [Serializable]
+    [AddNodeMenu("#MENUNAME#")]
     public class #SCRIPTNAME# : CompositeNode
     {
         // OnStart is called immediately before execution. It is used to setup any variables that need to be reset from the previous run.

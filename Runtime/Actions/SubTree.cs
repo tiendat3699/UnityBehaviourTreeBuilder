@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 namespace BehaviourTreeBuilder
 {
     [Serializable]
+    [AddNodeMenu("Actions")]
     public class SubTree : ActionNode
     {
         [Tooltip("Behaviour tree asset to run as a subtree")]
