@@ -59,7 +59,7 @@ namespace BehaviourTreeBuilder
 
         public override string OnShowDescription()
         {
-            return $"Detect Radius: {_detectRadius.Value} \n Detected: {state == State.Success}";
+            return $"Detect Radius: {_detectRadius.Value} \nDetected: {state == State.Success}";
         }
     }
 }

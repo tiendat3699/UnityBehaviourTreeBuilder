@@ -25,7 +25,7 @@ namespace BehaviourTreeBuilder
 
         public override string OnShowDescription()
         {
-            return $"{pair.key.name}{pair.value}";
+            return pair.key != null ? $"{pair.key.name}{pair.value}" : "";
         }
     }
 }

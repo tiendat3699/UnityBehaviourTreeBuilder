@@ -22,7 +22,7 @@ namespace BehaviourTreeBuilder
         protected override State OnUpdate()
         {
             var value = Random.value;
-            if (value > chanceOfFailure) return State.Failure;
+            if (value <= chanceOfFailure) return State.Failure;
             return State.Success;
         }
     }

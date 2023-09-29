@@ -30,8 +30,7 @@ namespace BehaviourTreeBuilder
 
         public override string OnShowDescription()
         {
-            if (pair == null) return "";
-            return $"Property: {pair.key.name} \n Compare value {pair.value}" ;
+            return pair.key == null ? "" : $"Property: {pair.key.name} \nCompare value {pair.value}";
         }
     }
 }

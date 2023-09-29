@@ -90,7 +90,8 @@ namespace BehaviourTreeBuilder
                     .Replace("#MENUNAME#", menuPath);;
                 if (_setting.autoGenarateNameSpace)
                 {
-                    string nameSpace = _setting.rootNamespace + menuPath
+                    string nameSpace = _setting.rootNamespace + path
+                        .Replace("Assets/","")
                         .Replace("/",".")
                         .Replace(" ", "");
 

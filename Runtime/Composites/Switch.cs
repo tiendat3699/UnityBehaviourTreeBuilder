@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 
 namespace BehaviourTreeBuilder
 {
@@ -44,7 +45,7 @@ namespace BehaviourTreeBuilder
 
         public override string OnShowDescription()
         {
-            return $"Interruptable: {interruptable}";
+            return $"Current: {index.Value} \nInterruptable: {interruptable}";
         }
     }
 }

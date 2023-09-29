@@ -11,7 +11,6 @@ namespace BehaviourTreeBuilder
 {
     public class CreateNodeWindow : ScriptableObject, ISearchWindowProvider
     {
-        public string testing;
         private Texture2D icon;
         private bool isSourceParent;
         private EditorUtility.ScriptTemplate[] scriptFileAssets;
@@ -121,7 +120,7 @@ namespace BehaviourTreeBuilder
                 var attribute = type.GetCustomAttribute<AddNodeMenuAttribute>();
                 if (attribute != null)
                 {
-                    var path =  attribute.menuName != "" ? attribute.menuName + "/" + type.Name : "Other/" + type.Name;
+                    var path =  attribute.MenuName != "" ? attribute.MenuName + "/" + type.Name : "Other/" + type.Name;
                     listView.Add(new ListNodeSearchData(type, path));
                 }
             }
@@ -178,7 +177,6 @@ namespace BehaviourTreeBuilder
         public ListNodeSearchData(Type type, string path)
         {
             TypeNode = type;
-            var attribute = type.GetCustomAttribute<AddNodeMenuAttribute>();
             Path = path;
         }
     }
