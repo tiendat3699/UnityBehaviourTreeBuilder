@@ -7,10 +7,6 @@ namespace BehaviourTreeBuilder
     [AddNodeMenu("Actions")]
     public class MoveTo : ActionNode
     {
-        [SerializeField] private MoveMethod _moveMethod;
-        [PropertyShowIf( "_usePosition", true)]
-        [SerializeField] private NodeProperty<Transform> _target;
-#if CORE_3D
         public enum MoveMethod
         {
             AddForce,
@@ -19,6 +15,10 @@ namespace BehaviourTreeBuilder
             Velocity,
             Steering
         }
+        [SerializeField] private MoveMethod _moveMethod;
+        [PropertyShowIf( "_usePosition", true)]
+        [SerializeField] private NodeProperty<Transform> _target;
+#if CORE_3D
         [SerializeField] private NodeProperty<Vector3> _position;
         private Vector3 _destination;
 #else
@@ -108,7 +108,7 @@ namespace BehaviourTreeBuilder
             var forward = _transform.up;
             Quaternion targetRot = Quaternion.LookRotation(forward, moveDirection);
             Quaternion rot = Quaternion.RotateTowards(_transform.rotation, targetRot, _rotateSpeed.Value * Time.fixedDeltaTime);
-            if (Vector2.Angle(moveDirection, forward) >= _stopRotate)
+            if (Vector2.Angle(moveDirection, forward) >= _angleStopRotate)
             {
                 context.Rigidbody2D.MoveRotation(rot);
             }
